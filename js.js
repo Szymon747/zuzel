@@ -1,41 +1,50 @@
 console.log("ooo")
 var klikniete = "";
-var kliked="false"
+var kliked = false
 class motor {
     constructor(x, y, color, way) {
+        this.way = way;
         this.x = x;
         this.y = y;
+
+
+
+
+        document.onkeydown = (e) =>{
+                if (e.key=="ArrowLeft") {
+                    this.way = (this.way + 5)%360
+                    console.log(this.way)
+                }
+                if (e.key=="ArrowRight") {
+                    this.way = (this.way - 5)%360
+                    console.log(this.way)
+                }
+
+                console.log(stuser)
+                kliked = false
+            }
+
     }
 }
-let stuser = new motor(400, 370, "#dddddd", 90)
+let stuser = new motor(400, 370, "#dddddd", 0)
+
+
 
 function kDown(e) {
-    // keydown - "A" / "a"
-    console.log("down");
-    console.log(e.which); //   65 / 65
     klikniete = e.which
-    kliked=true;
+    kliked = true;
 }
-function kUp(e){
-
-    kliked=false;
+function kUp(e) {
+    kliked = false;
 }
 
 setInterval(function () {
 
-
-
-
-
-    console.log("ojoj")
-
-
+    stuser.x=stuser.x+Math.cos(stuser.way*Math.PI/180);
+    stuser.y=stuser.y+Math.sin(stuser.way*Math.PI/180);
 
 
     var c = document.getElementById("myCanvas");
-
-
-
 
     var borders = c.getContext("2d");
     borders.beginPath();
@@ -64,5 +73,5 @@ setInterval(function () {
     player.fill()
     player.stroke();
 
-}, 100);
+}, 10);
 
